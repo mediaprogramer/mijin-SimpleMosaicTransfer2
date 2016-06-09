@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>mijin simple wallet</title>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/core.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/x64-core.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/sha3.js"></script>
+<script src="mosaic_transfer.js"></script>
+<script src="nacl-fast.js"></script>
+<script src="KeyPair.js"></script>
+<script>
+
+var URLS = [
+"xxx.xxx.xxx.xxx",
+"xxx.xxx.xxx.xxx",
+"xxx.xxx.xxx.xxx",
+"xxx.xxx.xxx.xxx",
+];
+
+//Prepare_001
+var SENDER_PRIVATE_KEY = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";	//送信元の秘密鍵
+var SENDER_PUBLIC_KEY =  "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"; 	//送信先公開鍵
+
+//送り先
+var RECIPIENT_ADDRESS = "MDA6MJ3OR2WEN2FZB64GWZIUJNX5SKBWJTHAEP67";								//送信先アドレス
+
+
+//モザイク定義
+var MOSAICS = [
+	{"mosaicId":{'name': "bar",'namespaceId': "foo"} ,"quantity":1,"supply":100000000, "divisibility":1},
+	{"mosaicId":{'name': "xem",'namespaceId': "nem"} ,"quantity":1000000000,"supply":8999999999,"divisibility":6}
+]; 
+var MULTIPLIER = 1;		//送信セット数
+
+$(function(){
+	function sendRequest(){
+		var result = confirm("Mosaicを送信します。よろしいですか？");
+		if(result){
+			mosaicTransferRequest().done(
+			function(data){
+				console.log(data);
+			});
+		}
+	}
+	$("#btnReset").click(function(){sendRequest();return false;});
+});
+	
+</script>
+</head>
+<body>
+
+<h1>MOSAIC送信サンプル</h1>
+<button id="btnReset">送信</button>
+
+</body>
+</html>
